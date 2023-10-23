@@ -27,7 +27,7 @@ db_params = {
         # print("Close connection.")
 
 def search_data(connection, cursor, location, date, shift):
-    search_query = sql.SQL(f"SELECT * FROM pitch WHERE location = {location} AND time = {date}").format(sql.Literal(location))
+    search_query = sql.SQL(f"SELECT * FROM pitch WHERE location = {location} AND shift = {date}").format(sql.Literal(location))
     cursor.execute(search_query)
     result = cursor.fetchall()
     return result
