@@ -1,0 +1,64 @@
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 25, in <module>
+    connection = psycopg2.connect(**db_params)
+  File "/usr/local/lib/python3.10/dist-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+
+
+
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 24, in <module>
+    connection = psycopg2.connect(**db_params)
+  File "/usr/local/lib/python3.10/dist-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+
+
+
+connection to server at "4.194.192.115", port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "4.194.192.115", port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 24, in <module>
+    connection = psycopg2.connect(**db_params)
+  File "/usr/local/lib/python3.10/dist-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "4.194.192.115", port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "4.194.192.115", port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+
+
+
+no results to fetch
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 24, in <module>
+    db_version = cursor.fetchone()
+psycopg2.ProgrammingError: no results to fetch
+
+
+
+no results to fetch
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 24, in <module>
+    db_version = cursor.fetchone()
+psycopg2.ProgrammingError: no results to fetch
+
+
+
+name 'cur' is not defined
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 25, in <module>
+    cur.execute('SELECT version()')
+NameError: name 'cur' is not defined
+
+
+
