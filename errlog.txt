@@ -62,3 +62,87 @@ NameError: name 'cur' is not defined
 
 
 
+column "name" does not exist
+LINE 1: SELECT "name" FROM user
+               ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 19, in <module>
+    selecttest(connection, cursor)
+  File "/home/thanhtd/database_management/query.py", line 29, in selecttest
+    cursor.execute(search_query)
+psycopg2.errors.UndefinedColumn: column "name" does not exist
+LINE 1: SELECT "name" FROM user
+               ^
+
+
+
+
+selecttest() takes 2 positional arguments but 3 were given
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 19, in <module>
+    print(selecttest(connection, cursor, 1))
+TypeError: selecttest() takes 2 positional arguments but 3 were given
+
+
+
+'module' object is not callable
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 20, in <module>
+    time_booked_pitch = datetime(2023, 11, 1, 20, 30).timestamp()
+TypeError: 'module' object is not callable
+
+
+
+syntax error at or near "Dinh"
+LINE 1: ..._time", "name", "id" FROM "pitch" WHERE "location" = My Dinh
+                                                                   ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 23, in <module>
+    print(search_data(connection, cursor, "My Dinh", "test1"))
+  File "/home/thanhtd/database_management/query.py", line 18, in search_data
+    cursor.execute(search_query)
+psycopg2.errors.SyntaxError: syntax error at or near "Dinh"
+LINE 1: ..._time", "name", "id" FROM "pitch" WHERE "location" = My Dinh
+                                                                   ^
+
+
+
+
+column "My Dinh" does not exist
+LINE 1: ...ime", "name", "id" FROM "pitch" WHERE "location" = "My Dinh"
+                                                              ^
+
+connection to server at "4.194.192.115", port 5432 failed: keepalives parameter must be an integer
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 15, in <module>
+    connection = psycopg2.connect(**params)
+  File "/home/thanhtd/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "4.194.192.115", port 5432 failed: keepalives parameter must be an integer
+
+
+
+
+Composable.__init__() takes 2 positional arguments but 3 were given
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 22, in <module>
+    selecttest(connection, cursor, id, float(12312312.0))
+  File "/home/thanhtd/database_management/query.py", line 34, in selecttest
+    select_query_booked = sql.SQL(f"SELECT \"booked_time\" FROM \"pitch\" WHERE \"id\" = {id}").format(sql.Literal(id, begin_time))
+TypeError: Composable.__init__() takes 2 positional arguments but 3 were given
+
+
+
+Composable.__init__() takes 2 positional arguments but 3 were given
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 22, in <module>
+    print(selecttest(connection, cursor, 1, float(12312312.0)))
+  File "/home/thanhtd/database_management/query.py", line 34, in selecttest
+    select_query_booked = sql.SQL(f"SELECT \"booked_time\" FROM \"pitch\" WHERE \"id\" = {id}").format(sql.Literal(id, begin_time))
+TypeError: Composable.__init__() takes 2 positional arguments but 3 were given
+
+
+
