@@ -146,3 +146,79 @@ TypeError: Composable.__init__() takes 2 positional arguments but 3 were given
 
 
 
+name 'transaction' is not defined
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 23, in <module>
+    transaction.rollback()
+NameError: name 'transaction' is not defined
+
+
+
+syntax error at or near "Tòng"
+LINE 1: ... name, email, phone, created_at) VALUES (6123, Võ Tòng, voto...
+                                                             ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 115, in create_user
+    cursor.execute(sql_create_user)
+psycopg2.errors.SyntaxError: syntax error at or near "Tòng"
+LINE 1: ... name, email, phone, created_at) VALUES (6123, Võ Tòng, voto...
+                                                             ^
+
+
+
+
+syntax error at or near "09"
+LINE 1: ...votongdanhho@gmail.com', '0987654321', 2023-10-30 09:54:39.3...
+                                                             ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 115, in create_user
+    cursor.execute(sql_create_user)
+psycopg2.errors.SyntaxError: syntax error at or near "09"
+LINE 1: ...votongdanhho@gmail.com', '0987654321', 2023-10-30 09:54:39.3...
+                                                             ^
+
+
+
+
+null value in column "deleted" of relation "user" violates not-null constraint
+DETAIL:  Failing row contains (1, 6123, Võ Tòng, votongdanhho@gmail.com, 0987654321, 2023-10-30 09:56:20.493939, null, null).
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 115, in create_user
+    cursor.execute(sql_create_user)
+psycopg2.errors.NotNullViolation: null value in column "deleted" of relation "user" violates not-null constraint
+DETAIL:  Failing row contains (1, 6123, Võ Tòng, votongdanhho@gmail.com, 0987654321, 2023-10-30 09:56:20.493939, null, null).
+
+
+
+
+null value in column "deleted" of relation "user" violates not-null constraint
+DETAIL:  Failing row contains (2, 6123, Võ Tòng, votongdanhho@gmail.com, 0987654321, 2023-10-30 09:57:52.556477, null, null).
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 115, in create_user
+    cursor.execute(sql_create_user)
+psycopg2.errors.NotNullViolation: null value in column "deleted" of relation "user" violates not-null constraint
+DETAIL:  Failing row contains (2, 6123, Võ Tòng, votongdanhho@gmail.com, 0987654321, 2023-10-30 09:57:52.556477, null, null).
+
+
+
+
+date/time field value out of range: "0987654321"
+LINE 1: ...booked_time, pending, created_at) VALUES (1, '2', '098765432...
+                                                             ^
+HINT:  Perhaps you need a different "datestyle" setting.
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 97, in create_pending_match
+    cursor.execute(sql_query)
+psycopg2.errors.DatetimeFieldOverflow: date/time field value out of range: "0987654321"
+LINE 1: ...booked_time, pending, created_at) VALUES (1, '2', '098765432...
+                                                             ^
+HINT:  Perhaps you need a different "datestyle" setting.
+
+
+
+
