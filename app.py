@@ -6,6 +6,7 @@ import json
 import datetime
 import psycopg2
 import uvicorn
+from settings import *
 
 app = FastAPI()
 
@@ -42,9 +43,9 @@ except (Exception, psycopg2.Error) as error:
 async def get(request: Request):
     query_params = request.query_params
     location = query_params.get("location")
-    begin_time = query_params.get("begin_time")
+    start_time = query_params.get("start_time")
     end_time = query_params.get("end_time")
-    pitch = search_location_pitch(connection, cursor, location, float(begin_time), float(end_time))
+    pitch = search_location_pitch(connection, cursor, location, float(start_time), float(end_time))
     if len(pitch) != 0:
           return Response(status_code=200, content=json.dumps(pitch))
     return Response(status_code=200, content=json.dumps([]))
@@ -53,9 +54,9 @@ async def get(request: Request):
 async def get(request: Request):
     query_params = request.query_params
     pitch_name = query_params.get("pitch_name")
-    begin_time = query_params.get("begin_time")
+    start_time = query_params.get("start_time")
     end_time = query_params.get("end_time")
-    pitch = search_pitch_name(connection, cursor, pitch_name, float(begin_time), float(end_time))
+    pitch = search_pitch_name(connection, cursor, pitch_name, float(start_time), float(end_time))
     if len(pitch) != 0:
           return Response(status_code=200, content=json.dumps(pitch))
     return Response(status_code=200, content=json.dumps([]))
@@ -65,39 +66,56 @@ async def get(request: Request):
 async def get(request: Request):
     output = await request.json()
     id = output['id']
-    begin_time = output['begin_time']
+    start_time = output['start_time']
     end_time = output['end_time']
-    res = update_booked_pitch(connection, cursor, int(id), float(begin_time), float(end_time))
+    res = update_booked_pitch(connection, cursor, int(id), float(start_time), float(end_time))
     if res == "success":
           return Response(status_code=200, content=json.dumps(string_to_json_form("Updated")))
     respone_failed = f"My database doesn't have pitch with id: {id}"
     return Response(status_code=200, content=json.dumps(string_to_json_form(respone_failed)))
 
-@app.post("/createUser/")
+@app.post("/createUser")
 async def get(request: Request):
     output = await request.json()
     psid = output['psid']
     name = output['name']
-    email = output['email']
-    phone = output['phone']
+    if 'email' in output:
+        email = output['email']
+    else: 
+        email = None
+    if 'phone' in output:
+        phone = output['phone']
+    else:
+        phone = None
     res = create_user(connection, cursor, psid, name, email, phone)
     if res == "success":
         return Response(status_code=200, content=json.dumps(string_to_json_form("success!")))
     else:
-        return Response(status_code=200, content=json.dumps(string_to_json_form("failed!")))
+        return Response(status_code=200, content=json.dumps(string_to_json_form("User has imported before or doesn't have enough required field!")))
 
 @app.post("/createPendingMatch/")
 async def get(request: Request):
     output = await request.json()
-    user_id = output['user_id']
+    psid = output['psid']
     pitch_id = output['pitch_id']
-    booked_time = output['booked_time']
-    res = create_pending_match(connection, cursor, user_id, pitch_id, booked_time)
+    interval_time = output['interval_time']
+    res = create_pending_match(connection, cursor, psid, pitch_id, interval_time)
     if res == "success":
         return Response(status_code=200, content=json.dumps(string_to_json_form("success!")))
     else:
-        return Response(status_code=200, content=json.dumps(string_to_json_form("failed!")))
-
+        return Response(status_code=200, content=json.dumps(string_to_json_form(res)))
+    
+@app.get("/findIntervalsWithPitchID")
+async def get(request: Request):
+    query_params = request.query_params
+    start_time = query_params.get('start_time')
+    end_time = query_params.get('end_time')
+    pitch_id = query_params.get("pitch_id")
+    if float(end_time) - float(start_time) < settings.min_time_match:
+         return Response(status_code=200, content=json.dumps(string_to_json_form("Interval times must be longer 45 minutes")))
+    intervals = findIntervalPitch(connection, cursor, start_time, end_time, pitch_id)
+    respone_dict = {"within_intervals": intervals[0], "outside_intervals": intervals[1]}
+    return Response(status_code=200, content=json.dumps(respone_dict))
 
 # TODO: join pitch table and user table to pending match
 

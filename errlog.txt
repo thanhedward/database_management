@@ -220,5 +220,235 @@ LINE 1: ...booked_time, pending, created_at) VALUES (1, '2', '098765432...
 HINT:  Perhaps you need a different "datestyle" setting.
 
 
+duplicate key value violates unique constraint "psid_unique"
+DETAIL:  Key (psid)=(6) already exists.
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 130, in create_user
+    cursor.execute(sql_create_user)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "psid_unique"
+DETAIL:  Key (psid)=(6) already exists.
+
+
+
+
+duplicate key value violates unique constraint "psid_unique"
+DETAIL:  Key (psid)=(6) already exists.
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 130, in create_user
+    cursor.execute(sql_create_user)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "psid_unique"
+DETAIL:  Key (psid)=(6) already exists.
+
+
+
+
+column "id" does not exist
+LINE 1: SELECT id FROM USER WHERE psid = 6123
+               ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 90, in create_pending_match
+    cursor.execute(get_user_id)
+psycopg2.errors.UndefinedColumn: column "id" does not exist
+LINE 1: SELECT id FROM USER WHERE psid = 6123
+               ^
+
+
+
+
+relation "USER" does not exist
+LINE 1: SELECT id FROM "USER" WHERE psid = 6123
+                       ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 90, in create_pending_match
+    cursor.execute(get_user_id)
+psycopg2.errors.UndefinedTable: relation "USER" does not exist
+LINE 1: SELECT id FROM "USER" WHERE psid = 6123
+                       ^
+
+
+
+
+relation "USER" does not exist
+LINE 1: SELECT id FROM "USER" WHERE psid = '6123'
+                       ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 90, in create_pending_match
+    cursor.execute(get_user_id)
+psycopg2.errors.UndefinedTable: relation "USER" does not exist
+LINE 1: SELECT id FROM "USER" WHERE psid = '6123'
+                       ^
+
+
+
+
+'psycopg2.extensions.connection' object has no attribute 'fetchall'
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 91, in create_pending_match
+    user_id = int(connection.fetchall())
+AttributeError: 'psycopg2.extensions.connection' object has no attribute 'fetchall'
+
+
+
+int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 91, in create_pending_match
+    user_id = int(cursor.fetchall())
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+
+
+
+syntax error at or near ")"
+LINE 1: ...d, interval_time, pending, created_at) VALUES ((3,), 4, '{"s...
+                                                             ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 105, in create_pending_match
+    cursor.execute(sql_query)
+psycopg2.errors.SyntaxError: syntax error at or near ")"
+LINE 1: ...d, interval_time, pending, created_at) VALUES ((3,), 4, '{"s...
+                                                             ^
+
+
+
+
+int() argument must be a string, a bytes-like object or a real number, not 'tuple'
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 91, in create_pending_match
+    user_id = int(cursor.fetchall()[0])
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'tuple'
+
+
+
+list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 110, in create_pending_match
+    print(vacant_shift_dict['start_time'])
+TypeError: list indices must be integers or slices, not str
+
+
+
+list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 110, in create_pending_match
+    print(vacant_shift_dict['start_time'])
+TypeError: list indices must be integers or slices, not str
+
+
+
+list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 110, in create_pending_match
+    print(vacant_shift_dict['start_time'])
+TypeError: list indices must be integers or slices, not str
+
+
+
+list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 110, in create_pending_match
+    print(vacant_shift_dict['start_time'])
+TypeError: list indices must be integers or slices, not str
+
+
+
+list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 112, in create_pending_match
+    print(vacant_shift_dict['start_time'])
+TypeError: list indices must be integers or slices, not str
+
+
+
+list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 114, in create_pending_match
+    print(vacant_shift_dict['start_time'])
+TypeError: list indices must be integers or slices, not str
+
+
+
+object of type 'bool' has no len()
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 109, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 227, in convertJsonToDict
+    time_stamps = findVacantTime(list, begin_time, end_time)
+  File "/home/thanhtd/database_management/query.py", line 269, in findVacantTime
+    if len(shift_available == 0):
+TypeError: object of type 'bool' has no len()
+
+
+
+object of type 'bool' has no len()
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 109, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 227, in convertJsonToDict
+    time_stamps = findVacantTime(list, begin_time, end_time)
+  File "/home/thanhtd/database_management/query.py", line 269, in findVacantTime
+    if len(shift_available == 0):
+TypeError: object of type 'bool' has no len()
+
+
+
+0
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 110, in create_pending_match
+    if len(vacant_shift_dict) == 1 and vacant_shift_dict[0][0] == begin_interval and vacant_shift_dict[0][1] == end_interval:
+KeyError: 0
+
+
+
+0
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 112, in create_pending_match
+    if len(vacant_shift_dict) == 1 and vacant_shift_dict[0][0] == begin_interval and vacant_shift_dict[0][1] == end_interval:
+KeyError: 0
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 107, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 217, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 107, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 217, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 107, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 218, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 108, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 219, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
 
 
