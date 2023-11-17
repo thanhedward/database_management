@@ -452,3 +452,163 @@ IndexError: list index out of range
 
 
 
+Section postgresql not found in the database.ini file
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 15, in <module>
+    params = config()
+  File "/home/thanhtd/database_management/config.py", line 16, in config
+    raise Exception('Section {0} not found in the {1} file'.format(section, filename))
+Exception: Section postgresql not found in the database.ini file
+
+
+
+Section postgresql not found in the database.ini file
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 15, in <module>
+    params = config()
+  File "/home/thanhtd/database_management/config.py", line 16, in config
+    raise Exception('Section {0} not found in the {1} file'.format(section, filename))
+Exception: Section postgresql not found in the database.ini file
+
+
+
+Section postgresql not found in the database.ini file
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 15, in <module>
+    params = config()
+  File "/home/thanhtd/database_management/config.py", line 16, in config
+    raise Exception('Section {0} not found in the {1} file'.format(section, filename))
+Exception: Section postgresql not found in the database.ini file
+
+
+
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 16, in <module>
+    connection = psycopg2.connect(**params, keepalives=1, keepalives_idle=30, keepalives_interval=10,keepalives_count=5)
+  File "/home/thanhtd/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+
+
+
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 16, in <module>
+    connection = psycopg2.connect(**params, keepalives=1, keepalives_idle=30, keepalives_interval=10,keepalives_count=5)
+  File "/home/thanhtd/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+
+
+
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 16, in <module>
+    connection = psycopg2.connect(**params, keepalives=1, keepalives_idle=30, keepalives_interval=10,keepalives_count=5)
+  File "/home/thanhtd/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 107, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 215, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 107, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 215, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 107, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 215, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 108, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 216, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 109, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 217, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 109, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 217, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 108, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 216, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 109, in create_pending_match
+    vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+  File "/home/thanhtd/database_management/query.py", line 217, in convertJsonToDict
+    list = [(pitchs_booked_time[0]['start_time'], pitchs_booked_time[0]['end_time'])]
+IndexError: list index out of range
+
+
+
+object of type 'bool' has no len()
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 109, in create_pending_match
+    if len(full_interval_pitch!=0):
+TypeError: object of type 'bool' has no len()
+
+
+

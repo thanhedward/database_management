@@ -91,8 +91,9 @@ def create_pending_match(connection, cursor, psid, pitch_id, interval_time):
     try: 
         cursor.execute(get_user_id)
         user_id = int(cursor.fetchall()[0][0])
+        print(user_id)
     except (Exception, psycopg2.Error) as error:
-        print("Insert pending match failed: ", error)
+        print("Query user id failed: ", error)
         connection.rollback()
         with open('errlog.txt', 'a') as f:
             f.write(str(error) + '\n')
@@ -104,11 +105,13 @@ def create_pending_match(connection, cursor, psid, pitch_id, interval_time):
         begin_interval = interval_time['start_time']
         end_interval = interval_time['end_time']    
         full_interval_pitch = fetch_pending_interval(cursor, pitch_id)
-        vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
-        if len(vacant_shift_dict) != 1 or vacant_shift_dict[0]['start_time'] != begin_interval or vacant_shift_dict[0]['end_time'] != end_interval:
-            return "Your interval is preempted"
+        print(full_interval_pitch)
+        if len(full_interval_pitch) > 0:
+            vacant_shift_dict = convertJsonToDict(full_interval_pitch, begin_interval, end_interval)
+            if len(vacant_shift_dict) != 1 or vacant_shift_dict[0]['start_time'] != begin_interval or vacant_shift_dict[0]['end_time'] != end_interval:
+                return "Your interval is preempted"
     except (Exception, psycopg2.Error) as error:
-        print("Insert pending match failed: ", error)
+        print("Your interval is preempted: ", error)
         connection.rollback()
         with open('errlog.txt', 'a') as f:
             f.write(str(error) + '\n')
@@ -279,7 +282,7 @@ def findVacantTime(list_pair_timestamp: list, start_time: float, end_time: float
 # print(datetime.fromtimestamp(1699474962.0, tz = None))
 
 # print("______")
-# print(datetime.fromtimestamp(1699045200.0, tz = None))
+# print(datetime.fromtimestamp(1700193494.472, tz = None))
 # print(datetime.fromtimestamp(1699052400.0, tz = None))
 # print("______")
 # print(datetime.fromtimestamp(1699120800.0, tz = None))
