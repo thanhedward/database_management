@@ -58,7 +58,100 @@ def insert_data(connection, cursor, value):
     connection.commit()
     print("Data has added to database.")
 
+# Confirm a rival from a pending match list
+def confirmRival(connection, cursor, pending_matching_id, psid):
+    # Get data from pending match
+    get_data_pending_match_query = sql.SQL(f"SELECT \"pitch_id\", \"user_id\", \"interval_time\" FROM \"pending_matching\" WHERE \"id\" = '{pending_matching_id}'").format(sql.Literal(pending_matching_id))
+    try: 
+        cursor.execute(get_data_pending_match_query)
+        data = cursor.fetchall()
+        print(f"Data pending match: {data}")
+        pitch_id = data[0][0]
+        rival_id = data[0][1]
+        interval_time = data[0][2]
+        start_time = interval_time["start_time"]
+        end_time = interval_time["end_time"]
+    except (Exception, psycopg2.Error) as error:
+        print("Pending matching id invalid, get data failed: ", error)
+        connection.rollback()
+        with open('errlog.txt', 'a') as f:
+            f.write(str(error) + '\n')
+            f.write(str(traceback.format_exc()) + '\n\n\n')
+        return "failed"
+    
+    user_id_confirm = get_user_id_from_psid(cursor, psid)
+    if (type(user_id_confirm) != int):
+        return user_id_confirm
 
+    res = update_booked_pitch(connection, cursor, pitch_id, start_time, end_time)
+    if (res == "failed"):
+        return "Add booked time to pitch failed"
+    
+    #Soft delete in pending matching table
+    soft_delete_sql = sql.SQL(f"UPDATE \"pending_matching\" SET \"pending\" = '0' WHERE \"id\" = {pending_matching_id}")
+    try:
+        cursor.execute(soft_delete_sql)
+        connection.commit() 
+        print("Soft delete pending matching record.")
+    except (Exception, psycopg2.Error) as error:
+        print("Delete pending matching failed: ", error)
+        connection.rollback()
+        with open('errlog.txt', 'a') as f:
+            f.write(str(error) + '\n')
+            f.write(str(traceback.format_exc()) + '\n\n\n')
+        return "Delete pending matching failed!"
+
+    current_time = datetime.now()
+    json_time = json.dumps(interval_time)
+    print(json_time)
+    create_pairing_match_query = sql.SQL(f"INSERT INTO \"pairing_match\" (user_book_match_id, user_pending_id, pitch_id, interval_match, created_at) VALUES ({user_id_confirm}, {rival_id}, {pitch_id}, '{json_time}', '{current_time}')")
+    try:
+        cursor.execute(create_pairing_match_query)
+        connection.commit() 
+        print("Pairing match has added to database.")
+        return "success"
+    except (Exception, psycopg2.Error) as error:
+        print("Insert pending match failed: ", error)
+        connection.rollback()
+        with open('errlog.txt', 'a') as f:
+            f.write(str(error) + '\n')
+            f.write(str(traceback.format_exc()) + '\n\n\n')
+        return "Insert pairing match failed!"
+
+    # try:
+    #     update_booked_pitch(connection, cursor, id, )
+
+
+def get_rival_info(connection, cursor, pending_matching_id):
+    get_user_id_query = sql.SQL(f"SELECT \"user_id\" FROM \"pending_matching\" WHERE \"id\" = '{pending_matching_id}'").format(sql.Literal(pending_matching_id))
+    try: 
+        cursor.execute(get_user_id_query)
+        data = cursor.fetchall()
+        print(f"Data pending match: {data}")
+        rival_id = data[0][0]
+    except (Exception, psycopg2.Error) as error:
+        print("Pending matching id is invalid, get user_id failed: ", error)
+        connection.rollback()
+        with open('errlog.txt', 'a') as f:
+            f.write(str(error) + '\n')
+            f.write(str(traceback.format_exc()) + '\n\n\n')
+        return "failed"
+
+    get_user_psid_query = sql.SQL(f"SELECT \"psid\" FROM \"user\" WHERE \"id\" = '{rival_id}'").format(sql.Literal(rival_id))
+    try: 
+        cursor.execute(get_user_psid_query)
+        data = cursor.fetchall()
+        print(f"Data pending match: {data}")
+        rival_psid = data[0][0]
+        return rival_psid
+    except (Exception, psycopg2.Error) as error:
+        print("User id is invalid, get user_psid failed: ", error)
+        connection.rollback()
+        with open('errlog.txt', 'a') as f:
+            f.write(str(error) + '\n')
+            f.write(str(traceback.format_exc()) + '\n\n\n')
+        return "failed"
+    
 # shift time is a dict like item in booked_time
 def update_booked_pitch(connection, cursor, id, start_time, end_time):
     json_shift = {'start_time' : start_time, 'end_time': end_time}
@@ -84,22 +177,26 @@ def update_booked_pitch(connection, cursor, id, start_time, end_time):
             f.write(str(error) + '\n')
             f.write(str(traceback.format_exc()) + '\n\n\n')
         return "failed"
-
-def create_pending_match(connection, cursor, psid, pitch_id, interval_time):
-    # check user exist
-    get_user_id = sql.SQL(f"SELECT id FROM \"user\" WHERE psid = '{psid}'")
+    
+def get_user_id_from_psid(cursor, psid):
+    get_user_id_query = sql.SQL(f"SELECT id FROM \"user\" WHERE psid = '{psid}'")
     try: 
-        cursor.execute(get_user_id)
+        cursor.execute(get_user_id_query)
         user_id = int(cursor.fetchall()[0][0])
-        print(user_id)
+        print(f"User id: {user_id}")
+        return user_id
     except (Exception, psycopg2.Error) as error:
         print("Query user id failed: ", error)
-        connection.rollback()
         with open('errlog.txt', 'a') as f:
             f.write(str(error) + '\n')
             f.write(str(traceback.format_exc()) + '\n\n\n')
-        return "failed"
+        return "Query user id failed"
 
+def create_pending_match(connection, cursor, psid, pitch_id, interval_time):
+    # check user exist
+    user_id = get_user_id_from_psid(cursor, psid)
+    if (type(user_id) != int):
+        return user_id
     #check interval valid
     try:
         begin_interval = interval_time['start_time']
@@ -183,7 +280,7 @@ def findIntervalPitch(connection, cursor, start_time, end_time, pitch_id):
     if result:
         # interval_time < min time of a match
         for interval_time in result:
-            interval_time[0]['pending_match_id']  = interval_time[1]
+            interval_time[0]['pending_matching_id']  = interval_time[1]
             if float(interval_time[0]['end_time']) < float(start_time) or float(interval_time[0]['start_time']) > float(end_time):
                 outside_interval.append((interval_time[0]))
             else:
@@ -259,6 +356,7 @@ def findVacantTime(list_pair_timestamp: list, start_time: float, end_time: float
     return shift_available
 
 
+
 # def confirmOpponent()
 
 # print((datetime(2023, 12, 6, 17, 0)).timestamp())
@@ -285,7 +383,7 @@ def findVacantTime(list_pair_timestamp: list, start_time: float, end_time: float
 # print(datetime.fromtimestamp(1700193494.472, tz = None))
 # print(datetime.fromtimestamp(1699052400.0, tz = None))
 # print("______")
-# print(datetime.fromtimestamp(1699120800.0, tz = None))
+# print(datetime.fromtimestamp(1700654400.0, tz = None))
 # print(datetime.fromtimestamp(1699131600.0, tz = None))
 # print("____________")
 

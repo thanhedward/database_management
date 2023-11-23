@@ -612,3 +612,153 @@ TypeError: object of type 'bool' has no len()
 
 
 
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 116, in get_user_id_from_psid
+    user_id = int(cursor.fetchall()[0][0])
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 116, in get_user_id_from_psid
+    user_id = int(cursor.fetchall()[0][0])
+IndexError: list index out of range
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 116, in get_user_id_from_psid
+    user_id = int(cursor.fetchall()[0][0])
+IndexError: list index out of range
+
+
+
+syntax error at or near "{"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, {'start_time': ...
+                                                     ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 92, in confirmRival
+    cursor.execute(create_pairing_match_query)
+psycopg2.errors.SyntaxError: syntax error at or near "{"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, {'start_time': ...
+                                                     ^
+
+
+
+
+syntax error at or near "{"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, {"start_time": ...
+                                                     ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 92, in confirmRival
+    cursor.execute(create_pairing_match_query)
+psycopg2.errors.SyntaxError: syntax error at or near "{"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, {"start_time": ...
+                                                     ^
+
+
+
+
+syntax error at or near "{"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, {"start_time": ...
+                                                     ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 92, in confirmRival
+    cursor.execute(create_pairing_match_query)
+psycopg2.errors.SyntaxError: syntax error at or near "{"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, {"start_time": ...
+                                                     ^
+
+
+
+
+invalid input syntax for type integer: "{"start_time": 1700196495.959, "end_time": 1700196495.959}"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, '{"start_time":...
+                                                     ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 92, in confirmRival
+    cursor.execute(create_pairing_match_query)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "{"start_time": 1700196495.959, "end_time": 1700196495.959}"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, '{"start_time":...
+                                                     ^
+
+
+
+
+invalid input syntax for type integer: "{"start_time": 1700196495.959, "end_time": 1700196495.959}"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, '{"start_time":...
+                                                     ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 94, in confirmRival
+    cursor.execute(create_pairing_match_query)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "{"start_time": 1700196495.959, "end_time": 1700196495.959}"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, '{"start_time":...
+                                                     ^
+
+
+
+
+invalid input syntax for type integer: "{"start_time": 1700196495.959, "end_time": 1700196495.959}"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, '{"start_time":...
+                                                     ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 94, in confirmRival
+    cursor.execute(create_pairing_match_query)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "{"start_time": 1700196495.959, "end_time": 1700196495.959}"
+LINE 1: INSERT INTO "pairing_match" VALUES (1, 2, 6, '{"start_time":...
+                                                     ^
+
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 141, in get_user_id_from_psid
+    user_id = int(cursor.fetchall()[0][0])
+IndexError: list index out of range
+
+
+
+column "created_at" of relation "pairing_match" does not exist
+LINE 1: ...ch_id, user_pending_id, pitch_id, interval_match, created_at...
+                                                             ^
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 95, in confirmRival
+    cursor.execute(create_pairing_match_query)
+psycopg2.errors.UndefinedColumn: column "created_at" of relation "pairing_match" does not exist
+LINE 1: ...ch_id, user_pending_id, pitch_id, interval_match, created_at...
+                                                             ^
+
+
+
+
+could not translate host name "98.70.2.1823" to address: Name or service not known
+
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/app.py", line 16, in <module>
+    connection = psycopg2.connect(**params, keepalives=1, keepalives_idle=30, keepalives_interval=10,keepalives_count=5)
+  File "/home/thanhtd/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "98.70.2.1823" to address: Name or service not known
+
+
+
+
+list index out of range
+Traceback (most recent call last):
+  File "/home/thanhtd/database_management/query.py", line 131, in get_rival_info
+    rival_id = data[0][0]
+IndexError: list index out of range
+
+
+

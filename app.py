@@ -117,10 +117,29 @@ async def get(request: Request):
     respone_dict = {"within_intervals": intervals[0], "outside_intervals": intervals[1]}
     return Response(status_code=200, content=json.dumps(respone_dict))
 
+@app.post("/confirmRival")
+async def get(request: Request):
+    output = await request.json()
+    pending_matching_id = output['pending_matching_id']
+    user_psid = output['user_psid']
+    res = confirmRival(connection, cursor, pending_matching_id, user_psid)
+    return Response(status_code=200, content=json.dumps(string_to_json_form(res)))
 # TODO: join pitch table and user table to pending match
+
+@app.get("/getRivalPSID")
+async def get(request: Request):
+    query_params = request.query_params
+    pending_matching_id = query_params.get('pending_matching_id')
+    rival_id = get_rival_info(connection, cursor, pending_matching_id)
+    if (rival_id != "failed"):
+        return Response(status_code=200, content=json.dumps({"rival_psid" : rival_id}))
+    else:
+        return Response(status_code=200, content=json.dumps(string_to_json_form(rival_id)))
 
 def string_to_json_form(str):
       return {"message": str}
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=8200, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0", port=8300, reload=True)
+
+# connection.rollback()
